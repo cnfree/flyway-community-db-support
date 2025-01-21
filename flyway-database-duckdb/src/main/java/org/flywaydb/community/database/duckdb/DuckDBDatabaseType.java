@@ -3,7 +3,6 @@ package org.flywaydb.community.database.duckdb;
 import org.flywaydb.core.api.ResourceProvider;
 import org.flywaydb.core.api.configuration.Configuration;
 import org.flywaydb.core.internal.database.base.BaseDatabaseType;
-import org.flywaydb.core.internal.database.base.CommunityDatabaseType;
 import org.flywaydb.core.internal.jdbc.JdbcConnectionFactory;
 import org.flywaydb.core.internal.jdbc.StatementInterceptor;
 import org.flywaydb.core.internal.parser.Parser;
@@ -11,7 +10,7 @@ import org.flywaydb.core.internal.parser.ParsingContext;
 
 import java.sql.Connection;
 
-public class DuckDBDatabaseType extends BaseDatabaseType implements CommunityDatabaseType {
+public class DuckDBDatabaseType extends BaseDatabaseType {
 
     @Override
     public String getName() {

@@ -18,7 +18,8 @@ public class DuckDBDatabase extends Database<DuckDBConnection> {
     }
 
     @Override
-    public void ensureSupported(Configuration configuration) {
+    public void ensureSupported() {
+
     }
 
     @Override
@@ -43,21 +44,22 @@ public class DuckDBDatabase extends Database<DuckDBConnection> {
 
     @Override
     public String getRawCreateScript(Table table, boolean baseline) {
-        final var createTable = """
-            CREATE TABLE %s (
-                installed_rank INTEGER NOT NULL,
-                version        VARCHAR,
-                description    VARCHAR NOT NULL,
-                type           VARCHAR NOT NULL,
-                script         VARCHAR NOT NULL,
-                checksum       INTEGER,
-                installed_by   VARCHAR NOT NULL,
-                installed_on   TIMESTAMP NOT NULL DEFAULT now(),
-                execution_time INTEGER NOT NULL,
-                success        BOOLEAN NOT NULL
-            );
-        """.formatted(table);
-        final var baselineStatement = baseline ? getBaselineStatement(table) + ";\n" : "";
+        String createTable = String.format(
+                "CREATE TABLE %s ("
+                        + "installed_rank INTEGER NOT NULL, "
+                        + "version VARCHAR, "
+                        + "description VARCHAR NOT NULL, "
+                        + "type VARCHAR NOT NULL, "
+                        + "script VARCHAR NOT NULL, "
+                        + "checksum INTEGER, "
+                        + "installed_by VARCHAR NOT NULL, "
+                        + "installed_on TIMESTAMP NOT NULL DEFAULT now(), "
+                        + "execution_time INTEGER NOT NULL, "
+                        + "success BOOLEAN NOT NULL"
+                        + ");",
+                table
+        );
+        String baselineStatement = baseline ? getBaselineStatement(table) + ";\n" : "";
 
         return createTable + baselineStatement;
     }

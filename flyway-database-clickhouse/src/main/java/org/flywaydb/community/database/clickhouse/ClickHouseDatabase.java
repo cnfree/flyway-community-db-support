@@ -72,6 +72,10 @@ public class ClickHouseDatabase extends Database<ClickHouseConnection> {
     }
 
     @Override
+    public void ensureSupported() {
+
+    }
+
     public void ensureSupported(Configuration configuration) {
     }
 

@@ -33,10 +33,10 @@ class DuckDBSupportTest {
     @Test
     void migrates() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .load();
 
         assertThat(getAllTablesNames("some_schema")).isEmpty();
 
@@ -54,10 +54,10 @@ class DuckDBSupportTest {
     @Test
     void does_not_apply_a_migration_several_times() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .load();
 
         // when
         flyway.migrate();
@@ -72,10 +72,10 @@ class DuckDBSupportTest {
     @Test
     void applies_only_new_migrations_when_some_was_already_applied() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .load();
 
         flyway.migrate();
         assertThat(countSomeTableRows()).isEqualTo(2);
@@ -83,10 +83,10 @@ class DuckDBSupportTest {
 
         // when
         Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(NEXT_MIGRATION_LOCATION)
-            .load()
-            .migrate();
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(NEXT_MIGRATION_LOCATION)
+                .load()
+                .migrate();
 
         // then
         assertThat(countSomeTableRows()).isEqualTo(3);
@@ -96,11 +96,11 @@ class DuckDBSupportTest {
     @Test
     void applies_migrations_to_non_default_schema() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .defaultSchema("some_schema")
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .defaultSchema("some_schema")
+                .load();
 
         assertThat(getAllTablesNames("some_schema")).isEmpty();
 
@@ -115,11 +115,11 @@ class DuckDBSupportTest {
     @Test
     void sets_baseline() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .baselineVersion("123")
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .baselineVersion("123")
+                .load();
 
         assertThat(getAllTablesNames("main")).isEmpty();
 
@@ -134,14 +134,14 @@ class DuckDBSupportTest {
     @Test
     void cleans_schema_ignoring_system_objects() throws SQLException {
         // given
-        final var flyway = Flyway.configure()
-            .dataSource(TEST_DB_CONNECTION_URL, "", "")
-            .locations(INITIAL_MIGRATION_LOCATION)
-            .cleanDisabled(false)
-            .load();
+        Flyway flyway = Flyway.configure()
+                .dataSource(TEST_DB_CONNECTION_URL, "", "")
+                .locations(INITIAL_MIGRATION_LOCATION)
+                .cleanDisabled(false)
+                .load();
 
-        final var systemViews = getAllViewsNames();
-        final var systemMacros = getAllMacrosNames();
+        List<String> systemViews = getAllViewsNames();
+        List<String> systemMacros = getAllMacrosNames();
 
         flyway.migrate();
         assertThat(getAllTablesNames("main")).isEqualTo(List.of("flyway_schema_history", "some_table"));
@@ -185,8 +185,8 @@ class DuckDBSupportTest {
 
     private JdbcTemplate jdbcTemplate() throws SQLException {
         return new JdbcTemplate(
-            DriverManager.getConnection("jdbc:duckdb:" + TEST_DB_FILENAME, "", ""),
-            new DuckDBDatabaseType()
+                DriverManager.getConnection("jdbc:duckdb:" + TEST_DB_FILENAME, "", ""),
+                new DuckDBDatabaseType()
         );
     }
 }

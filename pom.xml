@@ -21,30 +21,22 @@
     <parent>
         <groupId>org.flywaydb</groupId>
         <artifactId>flyway-parent</artifactId>
-        <version>10.16.0</version>
+        <version>9.22.3</version>
         <relativePath/>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>flyway-community-db-support</artifactId>
     <packaging>pom</packaging>
-    <version>10.16.0</version>
+    <version>9.22.3</version>
     <name>${project.artifactId}</name>
 
     <modules>
-        <module>flyway-database-tidb</module>
-        <module>flyway-database-ignite</module>
-        <module>flyway-database-yugabytedb</module>
-        <module>flyway-database-clickhouse</module>
-        <module>flyway-database-oceanbase</module>
-        <module>flyway-database-databricks</module>
-        <module>flyway-database-db2zos</module>
         <module>flyway-database-duckdb</module>
-        <module>flyway-community-db-support-archetype</module>
     </modules>
 
     <properties>
-        <version.flyway>10.16.0</version.flyway>
+        <version.flyway>9.22.3</version.flyway>
     </properties>
 
     <dependencyManagement>

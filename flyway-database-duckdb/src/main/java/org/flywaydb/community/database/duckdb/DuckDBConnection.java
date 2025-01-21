@@ -17,7 +17,7 @@ public class DuckDBConnection extends Connection<DuckDBDatabase> {
 
     @Override
     public void doChangeCurrentSchemaOrSearchPathTo(String schema) throws SQLException {
-        final var sql = "USE %s;".formatted(schema);
+        String sql = String.format("USE %s;", schema);
         jdbcTemplate.execute(sql);
     }
 
