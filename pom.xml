@@ -33,6 +33,8 @@
 
     <modules>
         <module>flyway-database-duckdb</module>
+        <module>flyway-database-clickhouse</module>
+        <module>flyway-database-opengauss</module>
     </modules>
 
     <properties>
@@ -60,30 +62,6 @@
                     <configuration>
                         <skip>true</skip>
                     </configuration>
-                </plugin>
-                <plugin>
-                    <artifactId>maven-resources-plugin</artifactId>
-                    <executions>
-                        <execution>
-                            <id>copy-license</id>
-                            <goals>
-                                <goal>copy-resources</goal>
-                            </goals>
-                            <phase>generate-resources</phase>
-                            <configuration>
-                                <resources>
-                                    <resource>
-                                        <directory>..</directory>
-                                        <includes>
-                                            <include>LICENSE.txt</include>
-                                            <include>README.txt</include>
-                                        </includes>
-                                    </resource>
-                                </resources>
-                                <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
-                            </configuration>
-                        </execution>
-                    </executions>
                 </plugin>
                 <plugin>
                     <groupId>org.apache.felix</groupId>
