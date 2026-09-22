@@ -51,10 +51,9 @@ public class ClickHouseSchema extends Schema<ClickHouseDatabase, ClickHouseTable
 
     @Override
     protected void doCreate() throws SQLException {
-        ClickHouseConnection systemConnection = database.getSystemConnection();
         String clusterName = database.getClusterName();
         boolean isClustered = StringUtils.hasText(clusterName);
-        systemConnection.getJdbcTemplate().executeStatement("CREATE DATABASE " + database.quote(name) + (isClustered ? (" ON CLUSTER " + clusterName) : ""));
+        jdbcTemplate.executeStatement("CREATE DATABASE " + database.quote(name) + (isClustered ? (" ON CLUSTER " + clusterName) : ""));
     }
 
     @Override

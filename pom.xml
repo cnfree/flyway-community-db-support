@@ -79,4 +79,63 @@
             </plugins>
         </pluginManagement>
     </build>
+
+    <repositories>
+        <repository>
+            <id>pscrepository</id>
+            <name>pscrepository</name>
+            <url>http://nexus.di-matrix.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>maven-nexus-repository</id>
+            <name>maven-nexus-repository</name>
+            <url>http://nexus.di-matrix.com/nexus/content/repositories/thirdparty/</url>
+            <layout>default</layout>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+        <repository>
+            <id>aliyun-repos</id>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>aliyun-plugin</id>
+            <url>https://maven.aliyun.com/nexus/content/groups/public/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
+
+
+    <!--使用分发上传将项目打成jar包，上传到nexus私服上-->
+    <distributionManagement>
+        <repository>
+            <!--nexus服务器中用户名：在settings.xml中和<server>的id一致-->
+            <id>maven-nexus-repository</id>
+            <url>https://nexus.di-matrix.com/nexus/content/repositories/thirdparty</url>
+        </repository>
+        <snapshotRepository>
+            <!--nexus服务器中用户名：在settings.xml中和<server>的id一致-->
+            <id>maven-nexus-snapshots-repository</id>
+            <url>https://nexus.di-matrix.com/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
 </project>

@@ -1,0 +1,1 @@
+ALTER TABLE test.ch_datatypes ADD COLUMN extra_info String AFTER str_val;
